@@ -16,10 +16,12 @@ const App = () => {
   };
 
   const handleAddTask = (title) => {
-    const newTask = { id: tasks.length, title, completed: false };
+    if (taskText != '') {
+      const newTask = { id: tasks.length, title, completed: false };
 
-    setTasks([...tasks, newTask]);
-    setTaskText('');
+      setTasks([...tasks, newTask]);
+      setTaskText('');
+    }
   };
 
   const handleSubmit = (event) => {
@@ -50,26 +52,46 @@ const App = () => {
 
   return (
     <>
-      <h1>To-Do App</h1>
+      <header className='py-1 md:py-2 bg-blue-900'>
+        <h1 className='text-lg text-center xl:pl-[295px] xl:text-xl xl:text-left font-bold text-blue-100'>
+          To-Do App
+        </h1>
+      </header>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='task-text'>Title:</label>
-        <input
-          type='text'
-          id='task-text'
-          placeholder='Write the task title'
-          value={taskText}
-          onChange={handleChange}
-        />
+      <main className='px-2 sm:px-10 md:px-16 lg:px-32 xl:px-72'>
+        <form
+          onSubmit={handleSubmit}
+          className='mt-4 md:mt-10 px-1 md:px-10 flex md:justify-center gap-x-3'
+        >
+          <div className='grow md:grow-0 md:w-[650px] flex items-center gap-x-3'>
+            <label htmlFor='task-text' className='max-[500px]:hidden'>
+              Task:
+            </label>
+            <input
+              type='text'
+              id='task-text'
+              placeholder='Write the task title'
+              value={taskText}
+              onChange={handleChange}
+              className='grow p-1 md:p-2 border-2 rounded'
+            />
+          </div>
 
-        <input type='submit' />
-      </form>
+          <input
+            type='submit'
+            value='Add'
+            className='p-1 md:p-2 text-white bg-blue-700 transition-colors hover:bg-blue-500 rounded shadow-md cursor-pointer'
+          />
+        </form>
 
-      <TaskList
-        tasks={tasks}
-        handleToggleComplete={handleToggleComplete}
-        onDeleteTask={onDeleteTask}
-      />
+        {tasks.length > 0 && (
+          <TaskList
+            tasks={tasks}
+            handleToggleComplete={handleToggleComplete}
+            onDeleteTask={onDeleteTask}
+          />
+        )}
+      </main>
     </>
   );
 };
