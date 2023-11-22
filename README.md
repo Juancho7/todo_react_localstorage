@@ -4,7 +4,7 @@ This is a simple to do app made with React and Local Storage for data persistanc
 
 It lets you add, see and delete tasks.
 
-![Todo App With React and LocalStorage]('./docs/screenshot.PNG')
+![Todo App With React and LocalStorage](./docs/screenshot.PNG 'Todo App With React and LocalStorage')
 
 Run these commands:
 
